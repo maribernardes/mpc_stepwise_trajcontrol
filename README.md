@@ -1,4 +1,5 @@
-# Package: trajcontrol (version: Data-driven stepwise MPC trajectory control)
+# Package: trajcontrol 
+##(version: Data-driven stepwise MPC trajectory control)
 
 ## Overview
 This repository contains:
