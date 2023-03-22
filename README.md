@@ -1,5 +1,5 @@
 # Package: trajcontrol 
-(version: Data-driven stepwise MPC trajectory control)
+Data-driven assist for stepwise needle insertion with MPC trajectory control
 
 ## Overview
 This repository contains:
