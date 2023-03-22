@@ -1,4 +1,4 @@
-# Package: trajcontrol (version: trajcontrol_lisa)
+# Package: trajcontrol (version: Data-driven stepwise MPC trajectory control)
 
 ## Overview
 This repository contains:
@@ -26,37 +26,6 @@ To run in debug mode, include:
 ```bash
   --ros-args --log-level debug
 ```
-
-#### Registration procedure:
-Collects sensor data at specific points (saved in 'files/registration_points.csv') and calculate the registration transform quaternion (saved in 'files/registration.csv'). However, we had better results using the 3D Slicer registration module to do the calculations from the registration points and then, replace the resultant tranformation quaternion at the registration.csv file
-
-To run the registration procedure:
-1. Launch PlusServer with configFile 'PlusDeviceSet_Server_NDIAurora_1Needle.xml'
-```bash
-  sudo /opt/PlusBuild-bin/bin/./PlusServerLauncher
-```
-2. Launch registration
-```bash
-  ros2 launch trajcontrol registration.launch.py
-```
-No experimental data is recorded, only the registration.csv  and registration_points.csv files.
-
-#### Jacobian experimental initialization:
-You can skip this experimental initialization and just use an arbitraty initial Jacobian (such as jacobian_geom.csv or jacobian_pivot.csv)
-The initial experimental Jacobian is calculated and saved in 'files/jacobian.csv'. It is obtained by performing a shallow insertion (20mm) with a random sequence of lateral movements of the template (or predefined, to change, comment the code). 
-The procedure uses the current jacobian.csv file (you can initialize it with values from jacobian_geom.csv) and updates it from the shallow insertion data. You might run this a few times (without reinitializing with jacobian_geom.csv) to decrease significantly the influence of the jacobian_geom values.
-
-To calculate the experimental initial Jacobian:
-1. Launch PlusServer with configFile 'PlusDeviceSet_Server_NDIAurora_1Needle.xml'
-```bash
-  sudo /opt/PlusBuild-bin/bin/./PlusServerLauncher
-```
-2. Launch Jacobian initialization:
-```bash
-  ros2 launch trajcontrol init_jacobian.launch.py insertion_length:=-20.0 filename:=NAME
-```
-Defining insertion_lenght(default:=-100.0) and filename (default=my_data) are optional.
-In addition to the jacobian.csv file, all experimental data is recorded and as 'data/NAME.csv' as defined by the filename parameter.
 
 #### Manually move the robot:
 You may want to manually position the robot (in horizontal and vertical directions) using the keyboard. 
@@ -137,3 +106,8 @@ The file defined by 'filename' is a csv with all experimental data and is it sav
 ## Communication diagram <a name="comm_diagram"></a>
 
 ![alternative text](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.github.com/maribernardes/trajcontrol_lisa/main/comm_diagram.txt)
+
+## Experimental data
+The "data" folder contains the experimental data for validation of data-driven estimation and the MPC trajectory controller. 
+Each run of the "save_file" ROS2 node generates a filename.csv and a filename_pred.mat file. 
+The script "create_matlab_workspace.m" creates a matlab workspace from such files and saves it in the "Script Matlab" folder. The "Script Matlab" folder contains the Matlab scripts to generate experimental plots.
