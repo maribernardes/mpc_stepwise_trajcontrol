@@ -1,0 +1,16 @@
+Experiment 2022-10-17
+Room temperature: 70F
+
+In-vitro phantoms:
+* Phantom A - 22g wax
+* Phantom A no skin - 22g wax without gaze layer
+* Phantom B - 45g wax
+* Phantom C - 90g wax
+
+Experiments:
+* Open-loop: Single-attempt stepwise (5mm steps) insertions without any correction to characterize each phantom deviation after 10cm insertion length
+	
+* Closed-loop: Single-attempt stepwise (5mm steps) insertion with MPC trajectory correction (10cm total insertion length)
+alpha = 0.65
+w = [1.0, 1.0, 3.5, 3.5]
+H = 4
