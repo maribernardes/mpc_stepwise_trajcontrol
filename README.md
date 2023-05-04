@@ -1,3 +1,4 @@
+[![DOI](https://zenodo.org/badge/617175085.svg)](https://zenodo.org/badge/latestdoi/617175085)
 # Package: trajcontrol 
 Data-driven assist for stepwise needle insertion with MPC trajectory control
 
